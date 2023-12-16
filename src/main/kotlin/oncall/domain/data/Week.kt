@@ -21,7 +21,7 @@ enum class Week(val value: String) {
     }
 
     companion object {
-        fun fromString(input: String): Week = Week.values().first { it.value == input }
+        fun fromString(input: String): Week? = Week.values().firstOrNull() { it.value == input }
     }
 
 }

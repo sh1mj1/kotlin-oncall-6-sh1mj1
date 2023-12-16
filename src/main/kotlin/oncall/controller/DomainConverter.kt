@@ -2,11 +2,13 @@ package oncall.controller
 
 import oncall.config.ExceptionConfig.UNKNOWN_ERROR
 import oncall.domain.data.*
+import oncall.view.InputView.Companion.INVALID_INPUT
 
 
 fun Pair<Int, String>.toDate(): Date {
     val month = Month(this.first)
     val day = Week.fromString(this.second)
+    requireNotNull(day) { INVALID_INPUT }
     return Date(month, 1, day)
 }
 

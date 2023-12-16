@@ -34,7 +34,9 @@ class InputView {
 
         val workers = workerStr.split(ASK_DELIMITER)
         workers.forEach {
-            require(it.isNotBlank())
+            require(it.isNotBlank()) {
+                INVALID_INPUT
+            }
         }
         return workers
     }
