@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console
 
 class InputView {
 
-    fun readMonthAndDay(): List<String> {
+    fun readMonthAndDay(): Pair<Int, String> {
         println("비상 근무를 배정할 월과 시작 요일을 입력하세요>")
         val monthAndDayStr = Console.readLine()
         require(monthAndDayStr.isNotBlank()) { "[ERROR] 입력이 올바르지 않습니다. 다시 입력해주세요." }
@@ -13,7 +13,7 @@ class InputView {
         require(monthAndDay.size == 2) { "[ERROR] 입력이 올바르지 않습니다. 다시 입력해주세요." }
 
         requireNotNull(monthAndDay[0].toIntOrNull()) { "[ERROR] 입력이 올바르지 않습니다. 다시 입력해주세요." }
-        return monthAndDay
+        return (monthAndDay[0].toInt() to monthAndDay[1])
     }
 
     fun readWeekDaysWorkers(): List<String> {
