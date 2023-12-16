@@ -13,22 +13,17 @@ class SequenceMaker(private val holidayDecider: HolidayDecider) {
 
         var nowDate: Date = date.copy()
         repeat(date.lastDate()) {
-            when (holidayDecider.isHoliday(nowDate)) {
-                true -> {
-                    val nextWorker = holidayWork.removeFirst()
-                    totalWorkingSequence.add(nextWorker)
-                    holidayWork.add(nextWorker)
-                }
-
-                false -> {
-                    val nextWorker = weekDayWork.removeFirst()
-                    totalWorkingSequence.add(nextWorker)
-                    weekDayWork.add(nextWorker)
-                }
-            }
+            val workers = if (holidayDecider.isHoliday(nowDate)) holidayWork else weekDayWork
+            processWorker(workers, totalWorkingSequence)
             nowDate = nowDate.nextDate()
         }
         return totalWorkingSequence.toList()
+    }
+
+    private fun processWorker(workers: MutableList<Worker>, totalWorkingSequence: MutableList<Worker>) {
+        val nextWorker = workers.removeFirst()
+        totalWorkingSequence.add(nextWorker)
+        workers.add(nextWorker)
     }
 
 }
