@@ -4,9 +4,9 @@ import oncall.domain.data.Date
 import oncall.domain.data.Worker
 import oncall.domain.data.WorkerSequence
 
-class OnCallPlanner(private val holidayDecider: HolidayDecider) {
+class SequenceMaker(private val holidayDecider: HolidayDecider) {
 
-    fun makeWorkingPlan(date: Date, weekdayWorkers: WorkerSequence, holidayWorkers: WorkerSequence): List<Worker> {
+    fun makeSequence(date: Date, weekdayWorkers: WorkerSequence, holidayWorkers: WorkerSequence): List<Worker> {
         val totalWorkingSequence = mutableListOf<Worker>()
         val weekDayWork = weekdayWorkers.workers.toMutableList()
         val holidayWork = holidayWorkers.workers.toMutableList()

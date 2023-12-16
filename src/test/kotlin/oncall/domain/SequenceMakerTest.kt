@@ -4,9 +4,9 @@ import oncall.domain.data.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class OnCallPlannerTest {
+class SequenceMakerTest {
 
-    val onCallPlanner = OnCallPlanner(HolidayDecider())
+    val sequenceMaker = SequenceMaker(HolidayDecider())
 
     @Test
     fun `평일과 휴일 순번을 가지고 근무 순번을 만든다`() {
@@ -18,7 +18,7 @@ class OnCallPlannerTest {
             listOf(Worker("d"), Worker("e"), Worker("f"), Worker("a"), Worker("b"), Worker("c"))
         )
 
-        val result = onCallPlanner.makeWorkingPlan(date, weekdaySequence, holidaySequence)
+        val result = sequenceMaker.makeSequence(date, weekdaySequence, holidaySequence)
         println(result)
         val expected = listOf(
             Worker("a"), Worker("b"), Worker("c"), Worker("d"), Worker("d"), Worker("e"), Worker("f"),
