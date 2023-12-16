@@ -13,6 +13,16 @@ data class Date(val month: Month, val date: Int, val day: Week) {
 
     fun nextDate(): Date = this.copy(month = month, date = date + 1, day = day.next())
 
+    fun getDatesInThisMonth(): List<Date> {
+        val allDates = mutableListOf<Date>()
+        var nowDate = this.copy()
+        repeat(lastDate()) {
+            allDates.add(nowDate)
+            nowDate = nowDate.copy(month = month, date = nowDate.date + 1, day = nowDate.day.next())
+        }
+        return allDates
+    }
+
     companion object {
         val monthHas31Days = listOf(
             Month(1),
