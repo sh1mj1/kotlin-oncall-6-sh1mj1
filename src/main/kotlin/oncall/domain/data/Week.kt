@@ -20,4 +20,8 @@ enum class Week(val value: String) {
         SUNDAY -> MONDAY
     }
 
+    companion object {
+        fun fromString(input: String): Week = Week.values().first { it.value == input }
+    }
+
 }
