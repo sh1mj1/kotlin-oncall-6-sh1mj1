@@ -1,5 +1,7 @@
 package oncall.domain.data
 
+import oncall.config.ExceptionConfig.ERROR_HEADER
+
 data class Date(val month: Month, val date: Int, val day: Week) {
 
     fun lastDate(): Int = when {
@@ -41,6 +43,6 @@ data class Date(val month: Month, val date: Int, val day: Week) {
             Month(11),
         )
 
-        const val INVALID_DATE = "[ERROR] 유효하지 않은 날짜입니다."
+        const val INVALID_DATE = "$ERROR_HEADER 유효하지 않은 날짜입니다."
     }
 }
