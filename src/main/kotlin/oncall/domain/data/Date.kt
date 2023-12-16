@@ -2,24 +2,16 @@ package oncall.domain.data
 
 data class Date(val month: Month, val date: Int, val day: Week) {
 
-    init {
-        when {
-            monthHas31Days.contains(month) -> require(date in 1..31) { INVALID_DATE }
-            month28Days.contains(month) -> require(date in 1..28) { INVALID_DATE }
-            month30Days.contains(month) -> require(date in 1..30) { INVALID_DATE }
-        }
-    }
-
     fun lastDate(): Int = when {
         monthHas31Days.contains(month) -> 31
         month28Days.contains(month) -> 28
         month30Days.contains(month) -> 30
         else -> {
-            throw IllegalArgumentException("INVALID_DATE")
+            throw IllegalArgumentException(INVALID_DATE)
         }
     }
 
-    fun nextDate(): Date = Date(month, date+1, day.next())
+    fun nextDate(): Date = this.copy(month = month, date = date + 1, day = day.next())
 
     companion object {
         val monthHas31Days = listOf(
