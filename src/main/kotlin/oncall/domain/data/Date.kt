@@ -10,6 +10,17 @@ data class Date(val month: Month, val date: Int, val day: Week) {
         }
     }
 
+    fun lastDate(): Int = when {
+        monthHas31Days.contains(month) -> 31
+        month28Days.contains(month) -> 28
+        month30Days.contains(month) -> 30
+        else -> {
+            throw IllegalArgumentException("INVALID_DATE")
+        }
+    }
+
+    fun nextDate(): Date = Date(month, date+1, day.next())
+
     companion object {
         val monthHas31Days = listOf(
             Month(1),
