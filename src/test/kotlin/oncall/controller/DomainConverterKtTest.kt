@@ -4,7 +4,7 @@ import oncall.domain.data.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class InputToDomainConverterKtTest {
+class DomainConverterKtTest {
 
     @Test
     fun `월과 요일을 Date 로 변환한다`() {
