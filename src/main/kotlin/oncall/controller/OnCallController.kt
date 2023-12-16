@@ -16,22 +16,20 @@ class OnCallController(
 
     fun start() {
         val firstDate = performActionWithRetry { inputView.readMonthAndDay().toDate() }
-        val workerSequences = getWorkerSequences()
-
-        val plan = getOnCallWorkingPlan(firstDate, workerSequences)
+        val plan = performActionWithRetry { getWorkingPlan(firstDate) }
 
         outputView.showWorkingPlan(plan, HolidayDecider())
     }
 
-    private fun getWorkerSequences(): WorkerSequences {
-        val workerSequences = performActionWithRetry {
-            WorkerSequences(
-                inputView.readWeekDaysWorkers().toWorkerSequence(),
-                inputView.readHolidaysWorkers().toWorkerSequence()
-            )
-        }
-        return workerSequences
+    private fun getWorkingPlan(firstDate: Date): Map<Date, Worker> {
+        val workerSequences = WorkerSequences(
+            inputView.readWeekDaysWorkers().toWorkerSequence(),
+            inputView.readHolidaysWorkers().toWorkerSequence()
+        )
+
+        return getOnCallWorkingPlan(firstDate, workerSequences)
     }
+
 
     private fun getOnCallWorkingPlan(
         firstDate: Date,
@@ -42,7 +40,7 @@ class OnCallController(
             firstDate,
             workerSequences.weekdayWorkerSequences,
             workerSequences.holidayWorkerSequences
-        )
+        ).workers
     )
 
     private fun <T> performActionWithRetry(action: () -> T): T {

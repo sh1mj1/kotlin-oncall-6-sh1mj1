@@ -19,12 +19,14 @@ class OnCallPlannerTest {
         )
         val result = onCallPlanner.makeTotalWorkingPlan(date, weekdaySequence, holidaySequence)
         println(result)
-        val expected = listOf(
-            Worker("a"), Worker("b"), Worker("c"), Worker("d"), Worker("e"), Worker("d"), Worker("f"),
-            Worker("e"), Worker("f"), Worker("a"), Worker("b"), Worker("c"), Worker("a"), Worker("b"),
-            Worker("d"), Worker("e"), Worker("f"), Worker("a"), Worker("b"), Worker("c"), Worker("d"),
-            Worker("c"), Worker("d"), Worker("e"), Worker("f"), Worker("a"), Worker("e"), Worker("f"),
-            Worker("b"), Worker("c"), Worker("d"),
+        val expected = FinalWorkers(
+            listOf(
+                Worker("a"), Worker("b"), Worker("c"), Worker("d"), Worker("e"), Worker("d"), Worker("f"),
+                Worker("e"), Worker("f"), Worker("a"), Worker("b"), Worker("c"), Worker("a"), Worker("b"),
+                Worker("d"), Worker("e"), Worker("f"), Worker("a"), Worker("b"), Worker("c"), Worker("d"),
+                Worker("c"), Worker("d"), Worker("e"), Worker("f"), Worker("a"), Worker("e"), Worker("f"),
+                Worker("b"), Worker("c"), Worker("d"),
+            )
         )
         Assertions.assertThat(result).isEqualTo(expected)
     }

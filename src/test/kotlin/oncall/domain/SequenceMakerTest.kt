@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 
 class SequenceMakerTest {
 
-    val sequenceMaker = SequenceMaker(HolidayDecider())
+    private val sequenceMaker = SequenceMaker(HolidayDecider())
 
     @Test
     fun `평일과 휴일 순번을 가지고 근무 순번을 만든다`() {
@@ -20,12 +20,14 @@ class SequenceMakerTest {
 
         val result = sequenceMaker.makeSequence(date, weekdaySequence, holidaySequence)
         println(result)
-        val expected = listOf(
-            Worker("a"), Worker("b"), Worker("c"), Worker("d"), Worker("d"), Worker("e"), Worker("f"),
-            Worker("e"), Worker("f"), Worker("a"), Worker("b"), Worker("c"), Worker("a"), Worker("b"),
-            Worker("d"), Worker("e"), Worker("f"), Worker("a"), Worker("b"), Worker("c"), Worker("d"),
-            Worker("c"), Worker("d"), Worker("e"), Worker("f"), Worker("a"), Worker("e"), Worker("f"),
-            Worker("b"), Worker("c"), Worker("d"),
+        val expected = FinalWorkers(
+            listOf(
+                Worker("a"), Worker("b"), Worker("c"), Worker("d"), Worker("d"), Worker("e"), Worker("f"),
+                Worker("e"), Worker("f"), Worker("a"), Worker("b"), Worker("c"), Worker("a"), Worker("b"),
+                Worker("d"), Worker("e"), Worker("f"), Worker("a"), Worker("b"), Worker("c"), Worker("d"),
+                Worker("c"), Worker("d"), Worker("e"), Worker("f"), Worker("a"), Worker("e"), Worker("f"),
+                Worker("b"), Worker("c"), Worker("d"),
+            )
         )
         assertThat(result).isEqualTo(expected)
     }

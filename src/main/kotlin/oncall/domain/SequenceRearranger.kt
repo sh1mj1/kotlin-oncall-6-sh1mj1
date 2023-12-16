@@ -1,10 +1,11 @@
 package oncall.domain
 
+import oncall.domain.data.FinalWorkers
 import oncall.domain.data.Worker
 
 class SequenceRearranger {
 
-    fun rearrange(workingSequence: List<Worker>): MutableList<Worker> {
+    fun rearrange(workingSequence: List<Worker>): FinalWorkers {
         val sequence = workingSequence.toMutableList()
 
         var needToCheck = true
@@ -20,7 +21,7 @@ class SequenceRearranger {
                 }
             }
         }
-        return sequence
+        return FinalWorkers(sequence)
     }
 
 }
